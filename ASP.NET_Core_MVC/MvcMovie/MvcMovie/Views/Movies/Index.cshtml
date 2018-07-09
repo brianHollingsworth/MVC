@@ -1,0 +1,82 @@
+﻿@* 3.5.) The @model directive allows you to access the list of movies that the
+    controller passed to the view by using a Model object that's strongly
+    typed. *@
+@*@model IEnumerable<MvcMovie.Models.Movie>*@
+@model MvcMovie.Models.MovieGenreViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@* 6.1.) The HTML <form> tag uses the Form Tag Helper, so when you submit the
+    form, the filter string is posted to the Index action of the movies
+    controller. *@
+<form asp-controller="Movies" asp-action="Index" method="get">
+    <p>
+        <select asp-for="movieGenre" asp-items="Model.genres">
+            <option value="">All</option>
+        </select>
+
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.movies[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.movies[0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.movies[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.movies[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.movies[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.movies)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @* The AnchorTagHelper dynamically generates the HTML href
+            attribute value from the controller action method and
+            route id. *@
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

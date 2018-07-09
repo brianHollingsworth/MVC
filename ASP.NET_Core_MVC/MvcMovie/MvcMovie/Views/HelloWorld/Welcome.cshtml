@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<h2>Welcome</h2>
+
+@* 2.3.) Create a loop in the Welcome.cshtml view template that displays "Message" NumTimes.  *@
+<ul>
+    @for (int i = 0; i < (int)ViewData["NumTimes"]; i++)
+    {
+    <li>@ViewData["Message"]</li>
+    }
+</ul>

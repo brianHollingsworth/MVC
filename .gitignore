@@ -328,3 +328,4 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/ASP.NET_Core_MVC/MvcMovie/MvcMovie/wwwroot
